@@ -38,9 +38,9 @@ using namespace Windows.Graphics.Imaging
 # See the Adavanced section below this for extra features.
 
 ## DISCORD ##
-$discord = $False
+$discord = $True
 # Your Discord Channel Webhook. Put your own here.
-$discordWebHook = "https://discordapp.com/api/webhooks/4593 - EXAMPLE - EVn24sRzpn5KspJHRebCkldhsklrh2378rUIPG8DWgUEtQpEunzGn7ysJ-rT"
+$discordWebHook = "https://discordapp.com/api/webhooks/717568200665071636/QNWANbApXesshGhuDgAA5fO6oaweK26qna51dStRk3pBlwtMK1bg5giWzNtRuLvrLtLn"
 
 ## TELEGRAM ##
 $telegram = $False
@@ -97,11 +97,11 @@ $entity_ID = "script.15372345285"
 # Default settings are to screenshot the top middle of your wow window which should be good for most people, but not all.
 # See Instructions on the Github page or use the 'Get Coords' within the app to find the area you want to scan for the BG Queue window.
 # Change '$useMyOwnCoordinates' to "Yes" and set the coordinates to use your own.
-$useMyOwnCoordinates = "No"
-$topleftX     = 1461
-$topLeftY     = 241
-$bottomRightX = 1979
-$bottomRightY = 356
+$useMyOwnCoordinates = "Yes"
+$topleftX     = 870
+$topLeftY     = 871
+$bottomRightX = 1048
+$bottomRightY = 913
 
 # Screenshot Location to save temporary img to for OCR Scan. Change if you want it somewhere else.
 $path = $env:temp
@@ -110,7 +110,7 @@ $path = $env:temp
 # Note: this script uses hardly any resources and is very quick at the screenshot/OCR process.
 # Keep in mind you have 1.5min to accept the Queue. And this script needs to see the popup, and send the notification.
 # Then you have to get off the toilet and make it back to your computer in time. Food for thought.
-$delay = 20
+$delay = 5
 
 # Option to stop BGNotifier once a BG Queue has popped. "Yes" to stop the program, or "No" to keep it running.
 # Default is 'Yes', stop scanning after it detects a BG Queue pop.
@@ -405,7 +405,7 @@ function BGNotifier {
     $script:label_coords_text.Visible = $False
     $label_help.Visible = $False
     $label_status.ForeColor = "#7CFC00"
-    $label_status.text = "BG Notifier is Running!"
+    $label_status.text = "JOES BOAR FINDER is Running!"
     $label_status.Refresh()
     $script:cancelLoop = $False
 
@@ -439,7 +439,7 @@ function BGNotifier {
             }
         }     
     }
-    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($disconnected))
+    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($disconnected) -or ($bgAlert -like "*Elder Mottled*"))
 
     if ($script:cancelLoop) {
         Return
@@ -454,6 +454,9 @@ function BGNotifier {
     }
     elseif ($bgAlert -like "*enter Arathi*") {
         $msg = "Your Arathi Basin Queue has Popped!"
+    }
+    elseif ($bgAlert -like "*Elder Mottled*") {
+        $msg = "Your Elder Boar has Popped Joe you ape @here @everyone"
     }
     elseif ($bgAlert -like "*disconnected*") {
         $msg = "You've been Disconnected!"
