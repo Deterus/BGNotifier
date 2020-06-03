@@ -98,10 +98,10 @@ $entity_ID = "script.15372345285"
 # See Instructions on the Github page or use the 'Get Coords' within the app to find the area you want to scan for the BG Queue window.
 # Change '$useMyOwnCoordinates' to "Yes" and set the coordinates to use your own.
 $useMyOwnCoordinates = "Yes"
-$topleftX     = 870
-$topLeftY     = 871
-$bottomRightX = 1048
-$bottomRightY = 913
+$topleftX     = 533
+$topLeftY     = 649
+$bottomRightX = 1328
+$bottomRightY = 922
 
 # Screenshot Location to save temporary img to for OCR Scan. Change if you want it somewhere else.
 $path = $env:temp
@@ -439,7 +439,7 @@ function BGNotifier {
             }
         }     
     }
-    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($disconnected) -or ($bgAlert -like "*Elder Mottled*"))
+    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($bgAlert -like "*Elder Mottled*") -or ($disconnected))
 
     if ($script:cancelLoop) {
         Return
